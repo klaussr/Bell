@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS House (
 );
 COMMENT ON TABLE House IS 'Дом';
 
-CREATE TABLE IF NOT EXISTS Person_House (
+CREATE TABLE IF NOT EXISTS user (
     person_id   INTEGER  NOT NULL COMMENT 'Уникальный идентификатор человека',
     house_id    INTEGER  NOT NULL COMMENT 'Уникальный идентификатор дома',
 
