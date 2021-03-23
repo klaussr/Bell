@@ -1,28 +1,58 @@
-CREATE TABLE IF NOT EXISTS organizations (
+CREATE TABLE IF NOT EXISTS Organizations (
     id         INTEGER              COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
-    version    INTEGER NOT NULL     COMMENT 'Служебное поле hibernate',
-    first_name VARCHAR(50) NOT NULL COMMENT 'Имя',
-    age        INTEGER  NOT NULL    COMMENT 'Возраст'
+    name VARCHAR(25) NOT NULL COMMENT 'Имя',
+    fullName VARCHAR(25),
+    inn INTEGER(12),
+    kpp INTEGER(20),
+    address VARCHAR(50),
+    phone CHAR(20),
+    isActive INTEGER(1)
 );
-COMMENT ON TABLE Person IS 'Человек';
+COMMENT ON TABLE Organizations IS 'Organizations';
 
-CREATE TABLE IF NOT EXISTS offices (
+
+CREATE TABLE IF NOT EXISTS Offices (
     id         INTEGER              COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
-    version    INTEGER NOT NULL     COMMENT 'Служебное поле hibernate',
+    orgId INTEGER(25),
+    name VARCHAR(25),
+    phone CHAR(20),
+    isActive INTEGER(1),
     address    VARCHAR(50) NOT NULL COMMENT 'Адрес'
 );
-COMMENT ON TABLE House IS 'Дом';
+COMMENT ON TABLE Offices IS 'Offices';
 
-CREATE TABLE IF NOT EXISTS user (
-    person_id   INTEGER  NOT NULL COMMENT 'Уникальный идентификатор человека',
-    house_id    INTEGER  NOT NULL COMMENT 'Уникальный идентификатор дома',
-
-    PRIMARY KEY (person_id, house_id)
+CREATE TABLE IF NOT EXISTS User (
+    officeId INTEGER(25)PRIMARY KEY AUTO_INCREMENT,
+    firstName VARCHAR(25),
+    lastName VARCHAR(25),
+    middleName VARCHAR(25),
+    position VARCHAR(25),
+    docCode INTEGER(15),
+    citizenshipCode INTEGER(5),
+    isIdentified INTEGER(1),
+    docName VARCHAR(25),
+    docNumber INTEGER(20),
+    docDate DATE
 );
-COMMENT ON TABLE Person_House IS 'join-таблица для связи человека и дома';
 
-CREATE INDEX IX_Person_House_Id ON Person_House (house_id);
-ALTER TABLE Person_House ADD FOREIGN KEY (house_id) REFERENCES House(id);
+CREATE TABLE IF NOT EXISTS Docs (
+    name VARCHAR(25),
+    code INTEGER(10)
+);
 
-CREATE INDEX IX_House_Person_Id ON Person_House (person_id);
-ALTER TABLE Person_House ADD FOREIGN KEY (person_id) REFERENCES Person(id);
+CREATE TABLE IF NOT EXISTS Countries (
+    name VARCHAR(25),
+    code INTEGER(10)
+);
+
+CREATE INDEX Org_Id ON Offices (orgId);
+ALTER TABLE Offices ADD FOREIGN KEY (orgId) REFERENCES Organizations(id);
+
+CREATE INDEX Offices_Id ON User (officeId);
+ALTER TABLE User ADD FOREIGN KEY (officeId) REFERENCES Offices(id);
+
+CREATE INDEX DocName_Id ON User (docName);
+ALTER TABLE User ADD FOREIGN KEY (docName) REFERENCES Docs(name);
+
+CREATE INDEX CitizenshipCode_Id ON User (citizenshipCode);
+ALTER TABLE User ADD FOREIGN KEY (citizenshipCode) REFERENCES Countries(code);
