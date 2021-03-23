@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS Organizations (
-    id         INTEGER              COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
+    id INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
     name VARCHAR(25) NOT NULL COMMENT 'Имя',
     fullName VARCHAR(25),
-    inn INTEGER(12),
-    kpp INTEGER(20),
+    inn VARCHAR(25),
+    kpp VARCHAR(25),
     address VARCHAR(50),
     phone CHAR(20),
     isActive INTEGER(1)
@@ -12,12 +12,12 @@ COMMENT ON TABLE Organizations IS 'Organizations';
 
 
 CREATE TABLE IF NOT EXISTS Offices (
-    id         INTEGER              COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
+    id INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
     orgId INTEGER(25),
     name VARCHAR(25),
     phone CHAR(20),
     isActive INTEGER(1),
-    address    VARCHAR(50) NOT NULL COMMENT 'Адрес'
+    address VARCHAR(50) NOT NULL COMMENT 'Адрес'
 );
 COMMENT ON TABLE Offices IS 'Offices';
 
@@ -29,7 +29,10 @@ CREATE TABLE IF NOT EXISTS User (
     position VARCHAR(25),
     docCode INTEGER(15),
     citizenshipCode INTEGER(5),
-    isIdentified INTEGER(1),
+    isIdentified INTEGER(1)
+);
+
+CREATE TABLE IF NOT EXISTS DocProperties (
     docName VARCHAR(25),
     docNumber INTEGER(20),
     docDate DATE
@@ -51,8 +54,8 @@ ALTER TABLE Offices ADD FOREIGN KEY (orgId) REFERENCES Organizations(id);
 CREATE INDEX Offices_Id ON User (officeId);
 ALTER TABLE User ADD FOREIGN KEY (officeId) REFERENCES Offices(id);
 
-CREATE INDEX DocName_Id ON User (docName);
-ALTER TABLE User ADD FOREIGN KEY (docName) REFERENCES Docs(name);
+CREATE INDEX DocName_Id ON DocProperties (docName);
+ALTER TABLE DocProperties ADD FOREIGN KEY (docName) REFERENCES Docs(name);
 
 CREATE INDEX CitizenshipCode_Id ON User (citizenshipCode);
 ALTER TABLE User ADD FOREIGN KEY (citizenshipCode) REFERENCES Countries(code);
