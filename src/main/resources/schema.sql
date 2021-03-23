@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS Person (
+CREATE TABLE IF NOT EXISTS organizations (
     id         INTEGER              COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
     version    INTEGER NOT NULL     COMMENT 'Служебное поле hibernate',
     first_name VARCHAR(50) NOT NULL COMMENT 'Имя',
