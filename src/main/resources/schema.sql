@@ -1,41 +1,41 @@
-CREATE TABLE IF NOT EXISTS Organizations (
-    id INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
-    name VARCHAR(25) NOT NULL COMMENT 'Имя',
+CREATE TABLE IF NOT EXISTS Organization (
+    id       INTEGER              COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
+    name     VARCHAR(25) NOT NULL COMMENT 'Имя',
     fullName VARCHAR(25),
-    inn VARCHAR(25),
-    kpp VARCHAR(25),
-    address VARCHAR(50),
-    phone CHAR(20),
+    inn      VARCHAR(25),
+    kpp      VARCHAR(25),
+    address  VARCHAR(50),
+    phone    CHAR(20),
     isActive INTEGER(1)
 );
-COMMENT ON TABLE Organizations IS 'Organizations';
+COMMENT ON TABLE Organization IS 'Organization';
 
 
-CREATE TABLE IF NOT EXISTS Offices (
-    id INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
-    orgId INTEGER(25),
-    name VARCHAR(25),
-    phone CHAR(20),
+CREATE TABLE IF NOT EXISTS Office (
+    id       INTEGER              COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
+    orgId    INTEGER(25),
+    name     VARCHAR(25),
+    phone    CHAR(20),
     isActive INTEGER(1),
-    address VARCHAR(50) NOT NULL COMMENT 'Адрес'
+    address  VARCHAR(50) NOT NULL COMMENT 'Адрес'
 );
-COMMENT ON TABLE Offices IS 'Offices';
+COMMENT ON TABLE Office IS 'Office';
 
 CREATE TABLE IF NOT EXISTS User (
-    officeId INTEGER(25)PRIMARY KEY AUTO_INCREMENT,
-    firstName VARCHAR(25),
-    lastName VARCHAR(25),
-    middleName VARCHAR(25),
-    position VARCHAR(25),
-    docCode INTEGER(15),
+    officeId        INTEGER(25) PRIMARY KEY AUTO_INCREMENT,
+    firstName       VARCHAR(25),
+    lastName        VARCHAR(25),
+    middleName      VARCHAR(25),
+    position        VARCHAR(25),
+    docCode         INTEGER(15),
     citizenshipCode INTEGER(5),
-    isIdentified INTEGER(1)
+    isIdentified    INTEGER(1)
 );
 
 CREATE TABLE IF NOT EXISTS DocProperties (
-    docName VARCHAR(25),
+    docName   VARCHAR(25),
     docNumber INTEGER(20) PRIMARY KEY AUTO_INCREMENT,
-    docDate DATE
+    docDate   DATE
 );
 
 CREATE TABLE IF NOT EXISTS Docs (
@@ -48,11 +48,11 @@ CREATE TABLE IF NOT EXISTS Countries (
     code INTEGER(10)
 );
 
-CREATE INDEX Org_Id ON Offices (orgId);
-ALTER TABLE Offices ADD FOREIGN KEY (orgId) REFERENCES Organizations(id);
+CREATE INDEX Org_Id ON Office (orgId);
+ALTER TABLE Office ADD FOREIGN KEY (orgId) REFERENCES Organization(id);
 
-CREATE INDEX Offices_Id ON User (officeId);
-ALTER TABLE User ADD FOREIGN KEY (officeId) REFERENCES Offices(id);
+CREATE INDEX Office_Id ON User (officeId);
+ALTER TABLE User ADD FOREIGN KEY (officeId) REFERENCES Office(id);
 
 CREATE INDEX Docs_Id ON DocProperties (docNumber);
 ALTER TABLE DocProperties ADD FOREIGN KEY (docNumber) REFERENCES User(docCode);
@@ -62,3 +62,34 @@ ALTER TABLE DocProperties ADD FOREIGN KEY (docName) REFERENCES Docs(name);
 
 CREATE INDEX CitizenshipCode_Id ON User (citizenshipCode);
 ALTER TABLE User ADD FOREIGN KEY (citizenshipCode) REFERENCES Countries(code);
+
+
+
+CREATE TABLE IF NOT EXISTS Person (
+                                      id         INTEGER              COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
+                                      version    INTEGER NOT NULL     COMMENT 'Служебное поле hibernate',
+                                      first_name VARCHAR(50) NOT NULL COMMENT 'Имя',
+                                      age        INTEGER  NOT NULL    COMMENT 'Возраст'
+);
+COMMENT ON TABLE Person IS 'Человек';
+
+CREATE TABLE IF NOT EXISTS House (
+                                     id         INTEGER              COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
+                                     version    INTEGER NOT NULL     COMMENT 'Служебное поле hibernate',
+                                     address    VARCHAR(50) NOT NULL COMMENT 'Адрес'
+);
+COMMENT ON TABLE House IS 'Дом';
+
+CREATE TABLE IF NOT EXISTS Person_House (
+                                            person_id   INTEGER  NOT NULL COMMENT 'Уникальный идентификатор человека',
+                                            house_id    INTEGER  NOT NULL COMMENT 'Уникальный идентификатор дома',
+
+                                            PRIMARY KEY (person_id, house_id)
+);
+COMMENT ON TABLE Person_House IS 'join-таблица для связи человека и дома';
+
+CREATE INDEX IX_Person_House_Id ON Person_House (house_id);
+ALTER TABLE Person_House ADD FOREIGN KEY (house_id) REFERENCES House(id);
+
+CREATE INDEX IX_House_Person_Id ON Person_House (person_id);
+ALTER TABLE Person_House ADD FOREIGN KEY (person_id) REFERENCES Person(id);
