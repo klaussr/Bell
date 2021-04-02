@@ -3,8 +3,12 @@ package ru.bellintegrator.practice.model;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+/**
+ * Свойства документов
+ */
 @Entity
 @Table(name = "DocProperties")
 public class DocProperties {
@@ -19,11 +23,15 @@ public class DocProperties {
     @Column(name = "docDate")
     private Date docDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "docCode")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "docNumber")
+    private User user;
 
-    private Set<DocProperties> docProperties;
+    private List<DocProperties> docProperties;
 
+    /**
+     * Конструктор для hibernate
+     */
     public DocProperties() {}
 
     public DocProperties(Long docNumber, String docName, Date docDate) {

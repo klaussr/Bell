@@ -1,9 +1,14 @@
 package ru.bellintegrator.practice.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+/**
+ * Пользователь
+ */
 @Entity
 @Table(name = "User")
 public class User {
@@ -33,11 +38,20 @@ public class User {
     @Column(name = "isIdentified", length = 10)
     private boolean isIdentified;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @OneToMany(cascade =
+            CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "docNumber")
+    private List<DocProperties> properties;
 
-    private Set<User> users;
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    private DocProperties docProperties;
 
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    private Country country;
+
+    /**
+     * Конструктор для hibernate
+     */
     public User() {}
 
     public User(Long id, String firstName, String lastName, String middleName, String position,  int docCode, int citizenshipCode, boolean isIdentified) {
@@ -109,20 +123,18 @@ public class User {
         this.isIdentified = isIdentified;
     }
 
-    public Set<User> getUsers() {
-        if (users == null) {
-            users = new HashSet<>();
+    public List<DocProperties> getProperties() {
+        if (properties == null) {
+            properties = new ArrayList<>();
         }
-        return users;
+        return properties;
     }
 
-    public void addUser(User user) {
-        getUsers().add(user);
-        user.getDocProperties().add(this);
+    public void addProperty(DocProperties property) {
+        getProperties().add(property);
     }
 
-    public void removeOrganization(User user) {
-        getUsers().remove(user);
-        user.getDocProperties().remove(this);
+    public void removeProperty(DocProperties property) {
+        getProperties().remove(property);
     }
 }

@@ -1,15 +1,21 @@
 package ru.bellintegrator.practice.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+/**
+ * Страна
+ */
 @Entity
 @Table(name = "Country")
 public class Country {
+    @Id
+    @Column(name = "code", length = 10)
+    private int code;
+
     @Column(name = "name", length = 25)
     private String name;
 
-    @Column(name = "code", length = 10)
-    private int code;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "code")
+    private User user;
 }

@@ -3,9 +3,14 @@ package ru.bellintegrator.practice.model;
 import sun.misc.Cache;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+/**
+ * Офис
+ */
 @Entity
 @Table(name = "Office")
 public class Office {
@@ -29,11 +34,14 @@ public class Office {
     @Column(name = "isActive", length = 10)
     private boolean isActive;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @OneToMany(cascade =
+            CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "officeId")
+    private List<User> users;
 
-    private Set<Office> offices;
-
+    /**
+     * Конструктор для hibernate
+     */
     public Office() {}
 
     public Office(Long id, int orgId, String name, String address, int phone, boolean isActive) {
@@ -89,21 +97,19 @@ public class Office {
         this.orgId = orgId;
     }
 
-    public Set<Office> getOffices() {
-        if (offices == null) {
-            offices = new HashSet<>();
+    public List<User> getUsers() {
+        if (users == null) {
+            users = new ArrayList<>();
         }
-        return offices;
+        return users;
     }
 
-    public void addOffice(Office office) {
-        getOffices().add(office);
-        office.getUsers().add(this);
+    public void addUser(User user) {
+        getUsers().add(user);
     }
 
-    public void removeOffice(Office office) {
-        offices.remove(office);
-        office.getUsers().remove(this);
+    public void removeUser(User user) {
+        users.remove(user);
     }
 
 }
