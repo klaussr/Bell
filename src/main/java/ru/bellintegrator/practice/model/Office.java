@@ -34,9 +34,12 @@ public class Office {
     @Column(name = "isActive", length = 10)
     private boolean isActive;
 
-    @OneToMany(cascade =
+    @ManyToOne(fetch = FetchType.Lazy)
+    @JoinColumn(name = "orgId")
+    private Organization organization;
+
+    @OneToMany(mappedBy = "office", cascade =
             CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "officeId")
     private List<User> users;
 
     /**
