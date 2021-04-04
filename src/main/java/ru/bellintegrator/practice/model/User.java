@@ -42,10 +42,9 @@ public class User {
     @JoinColumn(name = "officeId")
     private Office office;
 
-    @OneToMany(cascade =
+    @OneToMany(mappedBy = "user", cascade =
             CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "docNumber")
-    private List<DocProperties> properties;
+    private List<Doc> docs;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     private DocProperties docProperties;
