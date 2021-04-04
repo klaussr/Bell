@@ -47,9 +47,6 @@ public class User {
     private List<Doc> docs;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    private DocProperties docProperties;
-
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     private Country country;
 
     /**
