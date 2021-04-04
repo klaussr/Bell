@@ -38,9 +38,8 @@ public class Organization {
     @Column(name = "isActive", length = 10)
     private boolean isActive;
 
-    @OneToMany(cascade =
+    @OneToMany(mappedBy = "organization", cascade =
             CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "orgId")
     private List<Office> offices;
 
     /**
