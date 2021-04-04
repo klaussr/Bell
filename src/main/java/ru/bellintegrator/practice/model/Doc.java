@@ -17,8 +17,11 @@ public class Doc {
     @Column(name = "code", length = 10)
     private int code;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "docName")
+    @ManyToOne(fetch = FetchType.Lazy)
+    @JoinColumn(name = "code")
+    private User user;
+
+    @OneToMany(mappedBy = "doc", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DocProperties> docProperties;
 
     public List<DocProperties> getDocProperties() {
