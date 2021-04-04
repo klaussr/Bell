@@ -38,6 +38,10 @@ public class User {
     @Column(name = "isIdentified", length = 10)
     private boolean isIdentified;
 
+    @ManyToOne(fetch = FetchType.Lazy)
+    @JoinColumn(name = "officeId")
+    private Office office;
+
     @OneToMany(cascade =
             CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "docNumber")
