@@ -23,9 +23,9 @@ public class DocProperties {
     @Column(name = "docDate")
     private Date docDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "docNumber")
-    private User user;
+    private Doc doc;
 
     private List<DocProperties> docProperties;
 
