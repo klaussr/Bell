@@ -15,7 +15,6 @@ public class Country {
     @Column(name = "name", length = 25)
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "code")
-    private User user;
+    @OneToMany(mappedBy = "country", cascade = cascadeType.ALL, orphanRemoval = false)
+    private List<User> users;
 }
