@@ -46,7 +46,8 @@ public class User {
             CascadeType.ALL, orphanRemoval = true)
     private List<Doc> docs;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "citizenshipCode")
     private Country country;
 
     /**
