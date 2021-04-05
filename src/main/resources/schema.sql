@@ -85,11 +85,5 @@ CREATE TABLE IF NOT EXISTS Person_House (
                                             house_id    INTEGER  NOT NULL COMMENT 'Уникальный идентификатор дома',
 
                                             PRIMARY KEY (person_id, house_id)
-);
-COMMENT ON TABLE Person_House IS 'join-таблица для связи человека и дома';
-
-CREATE INDEX IX_Person_House_Id ON Person_House (house_id);
-ALTER TABLE Person_House ADD FOREIGN KEY (house_id) REFERENCES House(id);
-
-CREATE INDEX IX_House_Person_Id ON Person_House (person_id);
+); (person_id);
 ALTER TABLE Person_House ADD FOREIGN KEY (person_id) REFERENCES Person(id);
