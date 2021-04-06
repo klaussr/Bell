@@ -61,8 +61,8 @@ ALTER TABLE User ADD FOREIGN KEY (officeId) REFERENCES Office(id);
 CREATE INDEX Doc_Id ON DocProperties(id);
 ALTER TABLE DocProperties ADD FOREIGN KEY (id) REFERENCES User(docCode);
 
-CREATE INDEX DocName_Id ON DocProperties (id);
-ALTER TABLE DocProperties ADD FOREIGN KEY (id) REFERENCES Docs(id);
+CREATE INDEX DocName_Id ON DocProperties (docName);
+ALTER TABLE DocProperties ADD FOREIGN KEY (docName) REFERENCES Docs(id);
 
 CREATE INDEX Country_Id ON User (citizenshipCode);
 ALTER TABLE User ADD FOREIGN KEY (citizenshipCode) REFERENCES Countries(id);
