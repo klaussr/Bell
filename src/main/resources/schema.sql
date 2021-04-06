@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS DocProperties (
     docDate   DATE
 );
 
-CREATE TABLE IF NOT EXISTS Doc (
+CREATE TABLE IF NOT EXISTS Docs (
     id   INTEGER(20) PRIMARY KEY,
     name VARCHAR(25),
     code INTEGER(10)
@@ -62,7 +62,7 @@ CREATE INDEX Doc_Id ON DocProperties(id);
 ALTER TABLE DocProperties ADD FOREIGN KEY (id) REFERENCES User(docCode);
 
 CREATE INDEX DocName_Id ON DocProperties (id);
-ALTER TABLE DocProperties ADD FOREIGN KEY (id) REFERENCES Doc(id);
+ALTER TABLE DocProperties ADD FOREIGN KEY (id) REFERENCES Docs(id);
 
 CREATE INDEX Country_Id ON User (citizenshipCode);
 ALTER TABLE User ADD FOREIGN KEY (citizenshipCode) REFERENCES Countries(id);
