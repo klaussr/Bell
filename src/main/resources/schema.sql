@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS Office (
 COMMENT ON TABLE Office IS 'Office';
 
 CREATE TABLE IF NOT EXISTS User (
-    officeId        INTEGER(25) PRIMARY KEY AUTO_INCREMENT,
+    id              INTEGER(25) PRIMARY KEY AUTO_INCREMENT,
+    officeId        INTEGER(25),
     firstName       VARCHAR(25),
     lastName        VARCHAR(25),
     middleName      VARCHAR(25),
@@ -33,17 +34,20 @@ CREATE TABLE IF NOT EXISTS User (
 );
 
 CREATE TABLE IF NOT EXISTS DocProperties (
+    id        INTEGER(20) PRIMARY KEY AUTO_INCREMENT,
     docName   VARCHAR(25),
-    docNumber INTEGER(20) PRIMARY KEY AUTO_INCREMENT,
+    docNumber INTEGER(20),
     docDate   DATE
 );
 
 CREATE TABLE IF NOT EXISTS Docs (
+    id   INTEGER(20) PRIMARY KEY,
     name VARCHAR(25),
     code INTEGER(10)
 );
 
 CREATE TABLE IF NOT EXISTS Countries (
+    id   INTEGER(20) PRIMARY KEY,
     name VARCHAR(25),
     code INTEGER(10)
 );
@@ -54,11 +58,11 @@ ALTER TABLE Office ADD FOREIGN KEY (orgId) REFERENCES Organization(id);
 CREATE INDEX Office_Id ON User (officeId);
 ALTER TABLE User ADD FOREIGN KEY (officeId) REFERENCES Office(id);
 
-CREATE INDEX Docs_Id ON Docs(code);
-ALTER TABLE Docs ADD FOREIGN KEY (code) REFERENCES User(docCode);
+CREATE INDEX Doc_Id ON DocProperties(id);
+ALTER TABLE DocProperties ADD FOREIGN KEY (id) REFERENCES User(docCode);
 
-CREATE INDEX DocName_Id ON DocProperties (docName);
-ALTER TABLE DocProperties ADD FOREIGN KEY (docName) REFERENCES Docs(name);
+CREATE INDEX DocName_Id ON DocProperties (id);
+ALTER TABLE DocProperties ADD FOREIGN KEY (id) REFERENCES Docs(id);
 
-CREATE INDEX CitizenshipCode_Id ON User (citizenshipCode);
-ALTER TABLE User ADD FOREIGN KEY (citizenshipCode) REFERENCES Countries(code);
+CREATE INDEX Country_Id ON User (citizenshipCode);
+ALTER TABLE User ADD FOREIGN KEY (citizenshipCode) REFERENCES Countries(id);
