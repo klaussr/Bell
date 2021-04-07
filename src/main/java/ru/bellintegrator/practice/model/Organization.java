@@ -14,8 +14,7 @@ import java.util.Set;
 public class Organization {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "name", length = 25, nullable = false)
     private String name;
@@ -47,7 +46,7 @@ public class Organization {
      */
     public Organization() {}
 
-    public Organization(Long id, String name, String fullName, int inn, int kpp, String address, int phone, boolean isActive) {
+    public Organization(Integer id, String name, String fullName, int inn, int kpp, String address, int phone, boolean isActive) {
         this.id = id;
         this.name = name;
         this.fullName = fullName;
@@ -58,7 +57,7 @@ public class Organization {
         isActive = true;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 

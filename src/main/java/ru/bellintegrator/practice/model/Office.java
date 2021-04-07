@@ -16,8 +16,7 @@ import java.util.Set;
 public class Office {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "orgId", length = 25)
     private int orgId;
@@ -34,7 +33,7 @@ public class Office {
     @Column(name = "isActive", length = 10)
     private boolean isActive;
 
-    @ManyToOne(fetch = FetchType.Lazy)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orgId")
     private Organization organization;
 
@@ -47,7 +46,7 @@ public class Office {
      */
     public Office() {}
 
-    public Office(Long id, int orgId, String name, String address, int phone, boolean isActive) {
+    public Office(Integer id, int orgId, String name, String address, int phone, boolean isActive) {
         this.id = id;
         this.orgId = orgId;
         this.name = name;
@@ -56,7 +55,7 @@ public class Office {
         isActive = true;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 

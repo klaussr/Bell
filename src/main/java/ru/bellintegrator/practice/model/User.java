@@ -1,5 +1,7 @@
 package ru.bellintegrator.practice.model;
 
+import io.swagger.models.auth.In;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,8 +16,10 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     @Column(name = "officeId")
-    private Long id;
+    private Long officeId;
 
     @Column(name = "firstName", length = 25)
     private String firstName;
@@ -38,13 +42,13 @@ public class User {
     @Column(name = "isIdentified", length = 10)
     private boolean isIdentified;
 
-    @ManyToOne(fetch = FetchType.Lazy)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "officeId")
     private Office office;
 
-    @OneToMany(mappedBy = "user", cascade =
-            CascadeType.ALL, orphanRemoval = true)
-    private List<Doc> docs;
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade =
+            CascadeType.ALL, optional = false)
+    private DocProperties property;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "citizenshipCode")
@@ -55,7 +59,7 @@ public class User {
      */
     public User() {}
 
-    public User(Long id, String firstName, String lastName, String middleName, String position,  int docCode, int citizenshipCode, boolean isIdentified) {
+    public User(Integer id, String firstName, String lastName, String middleName, String position, int docCode, int citizenshipCode, boolean isIdentified) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -66,7 +70,7 @@ public class User {
         isIdentified = true;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -124,18 +128,5 @@ public class User {
         this.isIdentified = isIdentified;
     }
 
-    public List<DocProperties> getProperties() {
-        if (properties == null) {
-            properties = new ArrayList<>();
-        }
-        return properties;
-    }
 
-    public void addProperty(DocProperties property) {
-        getProperties().add(property);
-    }
-
-    public void removeProperty(DocProperties property) {
-        getProperties().remove(property);
-    }
 }

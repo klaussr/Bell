@@ -11,31 +11,15 @@ import java.util.List;
 @Table(name = "Doc")
 public class Doc {
     @Id
+    private Integer id;
     @Column(name = "name", length = 25)
     private String name;
 
     @Column(name = "code", length = 10)
     private int code;
 
-    @ManyToOne(fetch = FetchType.Lazy)
-    @JoinColumn(name = "code")
-    private User user;
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    private DocProperties property;
 
-    @OneToMany(mappedBy = "doc", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DocProperties> docProperties;
-
-    public List<DocProperties> getDocProperties() {
-        if (docProperties == null) {
-            docProperties = new ArrayList<>();
-        }
-        return docProperties;
-    }
-
-    public void addDocProperty(DocProperties docProperty) {
-        getDocProperties().add(docProperty);
-    }
-
-    public void removeDocProperty(DocProperties docProperty) {
-        getDocProperties().remove(docProperty);
-    }
 }

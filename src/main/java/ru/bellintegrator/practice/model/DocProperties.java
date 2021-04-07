@@ -13,7 +13,8 @@ import java.util.Set;
 @Table(name = "DocProperties")
 public class DocProperties {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     @Column(name = "docNumber")
     private Long docNumber;
 
@@ -23,11 +24,13 @@ public class DocProperties {
     @Column(name = "docDate")
     private Date docDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "docNumber")
-    private Doc doc;
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    private User user;
 
-    private List<DocProperties> docProperties;
+    @OneToOne(mappedBy = "property", fetch = FetchType.LAZY, cascade =
+            CascadeType.ALL, optional = false)
+    private Doc doc;
 
     /**
      * Конструктор для hibernate
@@ -60,20 +63,5 @@ public class DocProperties {
         return this.docDate = docDate;
     }
 
-    public Set<DocProperties> getDocProperties() {
-        if (docProperties == null) {
-            docProperties = new HashSet<>();
-        }
-        return docProperties;
-    }
 
-    public void addDocProperty(DocProperties docProperty) {
-        getDocProperties().add(docProperty);
-        docProperty.getDocProperties().add(this);
-    }
-
-    public void removeDocProperty(DocProperties docProperty) {
-        getDocProperties().remove(docProperty);
-        docProperty.getDocProperties().remove(this);
-    }
 }
