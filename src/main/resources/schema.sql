@@ -28,7 +28,6 @@ CREATE TABLE IF NOT EXISTS User (
     lastName        VARCHAR(25),
     middleName      VARCHAR(25),
     position        VARCHAR(25),
-    docCode         INTEGER(15),
     citizenshipCode INTEGER(5),
     isIdentified    INTEGER(1)
 );
