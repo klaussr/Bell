@@ -1,6 +1,7 @@
 package ru.bellintegrator.practice.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Страна
@@ -9,12 +10,12 @@ import javax.persistence.*;
 @Table(name = "Country")
 public class Country {
     @Id
-    @Column(name = "code", length = 10)
+    private Integer id;
+
     private int code;
 
-    @Column(name = "name", length = 25)
     private String name;
 
-    @OneToMany(mappedBy = "country", cascade = cascadeType.ALL, orphanRemoval = false)
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = false)
     private List<User> users;
 }

@@ -18,33 +18,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "officeId")
     private Long officeId;
 
-    @Column(name = "firstName", length = 25)
     private String firstName;
 
-    @Column(name = "lastName", length = 25)
     private String lastName;
 
-    @Column(name = "middleName", length = 25)
     private String middleName;
 
-    @Column(name = "position", length = 25)
     private String position;
 
-    @Column(name = "docCode", length = 15)
     private int docCode;
 
-    @Column(name = "citizenshipCode", length = 5)
     private int citizenshipCode;
 
-    @Column(name = "isIdentified", length = 10)
     private boolean isIdentified;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "officeId")
-    private Office office;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade =
             CascadeType.ALL, optional = false)

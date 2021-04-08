@@ -12,10 +12,9 @@ import java.util.List;
 public class Doc {
     @Id
     private Integer id;
-    @Column(name = "name", length = 25)
+
     private String name;
 
-    @Column(name = "code", length = 10)
     private int code;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -23,3 +22,4 @@ public class Doc {
     private DocProperties property;
 
 }
+ 

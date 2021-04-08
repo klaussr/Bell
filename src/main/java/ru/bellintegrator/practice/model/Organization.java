@@ -16,29 +16,24 @@ public class Organization {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name", length = 25, nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "fullName", length = 25)
     private String fullName;
 
-    @Column(name = "inn", length = 25)
     private int inn;
 
-    @Column(name = "kpp", length = 25)
     private int kpp;
 
-    @Column(name = "address", length = 50)
     private String address;
 
-    @Column(name = "phone", length = 20)
     private int phone;
 
-    @Column(name = "isActive", length = 10)
     private boolean isActive;
 
-    @OneToMany(mappedBy = "organization", cascade =
+    @OneToMany(cascade =
             CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "orgId")
     private List<Office> offices;
 
     /**
@@ -123,14 +118,4 @@ public class Organization {
         }
         return offices;
     }
-
-    public void addOffice(Office office) {
-        getOffices().add(office);
-    }
-
-    public void removeOffice(Office office) {
-        getOffices().remove(office);
-    }
-
-
 }

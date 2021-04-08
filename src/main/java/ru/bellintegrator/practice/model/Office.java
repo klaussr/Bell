@@ -18,27 +18,20 @@ public class Office {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "orgId", length = 25)
     private int orgId;
 
-    @Column(name = "name", length = 25)
     private String name;
 
-    @Column(name = "address", length = 50, nullable = false)
+    @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = "phone", length = 20)
     private int phone;
 
-    @Column(name = "isActive", length = 10)
     private boolean isActive;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orgId")
-    private Organization organization;
-
-    @OneToMany(mappedBy = "office", cascade =
+    @OneToMany(cascade =
             CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "officeId")
     private List<User> users;
 
     /**
@@ -105,13 +98,4 @@ public class Office {
         }
         return users;
     }
-
-    public void addUser(User user) {
-        getUsers().add(user);
-    }
-
-    public void removeUser(User user) {
-        users.remove(user);
-    }
-
 }

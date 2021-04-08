@@ -15,13 +15,10 @@ public class DocProperties {
     @Id
     private Integer id;
 
-    @Column(name = "docNumber")
     private Long docNumber;
 
-    @Column(name = "docName", length = 25)
     private String docName;
 
-    @Column(name = "docDate")
     private Date docDate;
 
     @OneToOne(fetch = FetchType.LAZY)
