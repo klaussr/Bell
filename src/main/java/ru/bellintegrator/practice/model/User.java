@@ -18,7 +18,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Long officeId;
+    private Integer officeId;
 
     private String firstName;
 
@@ -27,8 +27,6 @@ public class User {
     private String middleName;
 
     private String position;
-
-    private int docCode;
 
     private int citizenshipCode;
 
@@ -53,7 +51,6 @@ public class User {
         this.lastName = lastName;
         this.middleName = middleName;
         this.position = position;
-        this.docCode = docCode;
         this.citizenshipCode = citizenshipCode;
         isIdentified = true;
     }
@@ -92,12 +89,6 @@ public class User {
 
     public void setPosition(String position) {
         this.position = position;
-    }
-
-    public int getDocCode() { return docCode; }
-
-    public void setDocCode(int docCode) {
-        this.docCode = docCode;
     }
 
     public int getCitizenshipCode() {

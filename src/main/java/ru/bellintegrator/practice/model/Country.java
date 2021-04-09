@@ -7,9 +7,10 @@ import java.util.List;
  * Страна
  */
 @Entity
-@Table(name = "Country")
+@Table(name = "Countries")
 public class Country {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private int code;

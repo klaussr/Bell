@@ -27,7 +27,7 @@ public class Organization {
 
     private String address;
 
-    private int phone;
+    private char phone;
 
     private boolean isActive;
 
@@ -41,7 +41,7 @@ public class Organization {
      */
     public Organization() {}
 
-    public Organization(Integer id, String name, String fullName, int inn, int kpp, String address, int phone, boolean isActive) {
+    public Organization(Integer id, String name, String fullName, int inn, int kpp, String address, char phone, boolean isActive) {
         this.id = id;
         this.name = name;
         this.fullName = fullName;
@@ -76,32 +76,32 @@ public class Organization {
         return inn;
     }
 
-    public void setInn(int age) {
-        this.inn = age;
+    public void setInn(int inn) {
+        this.inn = inn;
     }
 
     public int getKpp() {
         return kpp;
     }
 
-    public void setKpp(int age) {
-        this.kpp = age;
+    public void setKpp(int kpp) {
+        this.kpp = kpp;
     }
 
     public String  getAddress() {
         return address;
     }
 
-    public void setAddress(String age) {
-        this.address = age;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getPhone() {
         return phone;
     }
 
-    public void setPhone(int age) {
-        this.phone = age;
+    public void setPhone(char phone) {
+        this.phone = phone;
     }
 
     public boolean getIsActive() {

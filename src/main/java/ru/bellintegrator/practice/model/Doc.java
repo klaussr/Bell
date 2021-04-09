@@ -17,8 +17,7 @@ public class Doc {
 
     private int code;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
+    @OneToOne(mappedBy = "doc", fetch = FetchType.LAZY)
     private DocProperties property;
 
 }

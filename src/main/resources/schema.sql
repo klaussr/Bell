@@ -2,8 +2,8 @@ CREATE TABLE IF NOT EXISTS Organization (
     id       INTEGER              COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
     name     VARCHAR(25) NOT NULL COMMENT 'Имя',
     fullName VARCHAR(25),
-    inn      VARCHAR(25),
-    kpp      VARCHAR(25),
+    inn      INTEGER(25),
+    kpp      INTEGER(25),
     address  VARCHAR(50),
     phone    CHAR(20),
     isActive INTEGER(1)

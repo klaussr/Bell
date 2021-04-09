@@ -15,7 +15,6 @@ import java.util.Set;
 @Table(name = "Office")
 public class Office {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private int orgId;
@@ -25,7 +24,7 @@ public class Office {
     @Column(name = "address", nullable = false)
     private String address;
 
-    private int phone;
+    private char phone;
 
     private boolean isActive;
 
@@ -39,7 +38,7 @@ public class Office {
      */
     public Office() {}
 
-    public Office(Integer id, int orgId, String name, String address, int phone, boolean isActive) {
+    public Office(Integer id, int orgId, String name, String address, char phone, boolean isActive) {
         this.id = id;
         this.orgId = orgId;
         this.name = name;
@@ -72,7 +71,7 @@ public class Office {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(char phone) {
         this.phone = phone;
     }
 

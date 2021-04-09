@@ -1,5 +1,7 @@
 package ru.bellintegrator.practice.model;
 
+import io.swagger.models.auth.In;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -13,9 +15,12 @@ import java.util.Set;
 @Table(name = "DocProperties")
 public class DocProperties {
     @Id
+    @Column(name = "userId")
     private Integer id;
 
-    private Long docNumber;
+    private Integer docId;
+
+    private Integer docNumber;
 
     private String docName;
 
@@ -25,8 +30,9 @@ public class DocProperties {
     @MapsId
     private User user;
 
-    @OneToOne(mappedBy = "property", fetch = FetchType.LAZY, cascade =
+    @OneToOne(fetch = FetchType.LAZY, cascade =
             CascadeType.ALL, optional = false)
+    @JoinColumn(name = "userId")
     private Doc doc;
 
     /**
@@ -34,13 +40,13 @@ public class DocProperties {
      */
     public DocProperties() {}
 
-    public DocProperties(Long docNumber, String docName, Date docDate) {
+    public DocProperties(Integer docNumber, String docName, Date docDate) {
         this.docNumber = docNumber;
         this.docName = docName;
         this.docDate = docDate;
     }
 
-    public Long getDocNumber() {
+    public Integer getDocNumber() {
         return docNumber;
     }
 
@@ -59,6 +65,4 @@ public class DocProperties {
     public Date setDocDate(Date docDate) {
         return this.docDate = docDate;
     }
-
-
 }
