@@ -18,10 +18,6 @@ public class DocProperties {
     @Column(name = "userId")
     private Integer id;
 
-    private Integer docId;
-
-    private Integer docNumber;
-
     private String docName;
 
     private Date docDate;
@@ -40,14 +36,9 @@ public class DocProperties {
      */
     public DocProperties() {}
 
-    public DocProperties(Integer docNumber, String docName, Date docDate) {
-        this.docNumber = docNumber;
+    public DocProperties(String docName, Date docDate) {
         this.docName = docName;
         this.docDate = docDate;
-    }
-
-    public Integer getDocNumber() {
-        return docNumber;
     }
 
     public String getDocName() {

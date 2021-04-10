@@ -21,13 +21,13 @@ public class Organization {
 
     private String fullName;
 
-    private int inn;
+    private String inn;
 
-    private int kpp;
+    private String kpp;
 
     private String address;
 
-    private char phone;
+    private int phone;
 
     private boolean isActive;
 
@@ -41,7 +41,7 @@ public class Organization {
      */
     public Organization() {}
 
-    public Organization(Integer id, String name, String fullName, int inn, int kpp, String address, char phone, boolean isActive) {
+    public Organization(Integer id, String name, String fullName, String  inn, String  kpp, String address, int phone, boolean isActive) {
         this.id = id;
         this.name = name;
         this.fullName = fullName;
@@ -72,19 +72,19 @@ public class Organization {
         this.fullName = fullName;
     }
 
-    public int getInn() {
+    public String getInn() {
         return inn;
     }
 
-    public void setInn(int inn) {
+    public void setInn(String inn) {
         this.inn = inn;
     }
 
-    public int getKpp() {
+    public String getKpp() {
         return kpp;
     }
 
-    public void setKpp(int kpp) {
+    public void setKpp(String  kpp) {
         this.kpp = kpp;
     }
 
@@ -100,7 +100,7 @@ public class Organization {
         return phone;
     }
 
-    public void setPhone(char phone) {
+    public void setPhone(int phone) {
         this.phone = phone;
     }
 

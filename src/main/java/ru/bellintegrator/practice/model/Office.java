@@ -15,8 +15,6 @@ import java.util.Set;
 @Table(name = "Office")
 public class Office {
     @Id
-    private Integer id;
-
     private int orgId;
 
     private String name;
@@ -24,7 +22,7 @@ public class Office {
     @Column(name = "address", nullable = false)
     private String address;
 
-    private char phone;
+    private int phone;
 
     private boolean isActive;
 
@@ -38,17 +36,12 @@ public class Office {
      */
     public Office() {}
 
-    public Office(Integer id, int orgId, String name, String address, char phone, boolean isActive) {
-        this.id = id;
+    public Office(int orgId, String name, String address, char phone, boolean isActive) {
         this.orgId = orgId;
         this.name = name;
         this.address = address;
         this.phone = phone;
         isActive = true;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public String getName() {
@@ -85,10 +78,6 @@ public class Office {
 
     public int getOrgId() {
         return orgId;
-    }
-
-    public void setOrgId(int orgId) {
-        this.orgId = orgId;
     }
 
     public List<User> getUsers() {

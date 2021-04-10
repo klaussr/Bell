@@ -15,9 +15,6 @@ import java.util.Set;
 @Table(name = "User")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
     private Integer officeId;
 
     private String firstName;
@@ -45,8 +42,8 @@ public class User {
      */
     public User() {}
 
-    public User(Integer id, String firstName, String lastName, String middleName, String position, int docCode, int citizenshipCode, boolean isIdentified) {
-        this.id = id;
+    public User(Integer officeId, String firstName, String lastName, String middleName, String position, int docCode, int citizenshipCode, boolean isIdentified) {
+        this.officeId = officeId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
@@ -55,8 +52,8 @@ public class User {
         isIdentified = true;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getOfficeId() {
+        return officeId;
     }
 
     public String getFirstNameName() {
