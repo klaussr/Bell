@@ -26,7 +26,6 @@ CREATE TABLE IF NOT EXISTS User (
     lastName        VARCHAR(25),
     middleName      VARCHAR(25),
     position        VARCHAR(25),
-    citizenshipCode INTEGER(5),
     isIdentified    INTEGER(1)
 );
 
@@ -60,5 +59,5 @@ ALTER TABLE DocProperties ADD FOREIGN KEY (userId) REFERENCES User(officeId);
 CREATE INDEX DocName_Id ON DocProperties (userId);
 ALTER TABLE DocProperties ADD FOREIGN KEY (userId) REFERENCES Docs(id);
 
-CREATE INDEX Country_Id ON User (citizenshipCode);
-ALTER TABLE User ADD FOREIGN KEY (citizenshipCode) REFERENCES Countries(id);
+CREATE INDEX Country_Id ON User (officeId);
+ALTER TABLE User ADD FOREIGN KEY (officeId) REFERENCES Countries(id);
