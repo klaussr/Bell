@@ -25,8 +25,6 @@ public class User {
 
     private String position;
 
-    private int citizenshipCode;
-
     private boolean isIdentified;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade =
@@ -42,13 +40,12 @@ public class User {
      */
     public User() {}
 
-    public User(Integer officeId, String firstName, String lastName, String middleName, String position, int docCode, int citizenshipCode, boolean isIdentified) {
+    public User(Integer officeId, String firstName, String lastName, String middleName, String position, int docCode, boolean isIdentified) {
         this.officeId = officeId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
         this.position = position;
-        this.citizenshipCode = citizenshipCode;
         isIdentified = true;
     }
 
@@ -86,14 +83,6 @@ public class User {
 
     public void setPosition(String position) {
         this.position = position;
-    }
-
-    public int getCitizenshipCode() {
-        return citizenshipCode;
-    }
-
-    public void setCitizenshipCode(int citizenshipCode) {
-        this.citizenshipCode = citizenshipCode;
     }
 
     public boolean getIsIdentified() {
